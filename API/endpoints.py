@@ -10,8 +10,8 @@ import db.db as db
 app = Flask(__name__)
 api = Api(app)
 
-HELLO = 'Hello'  # part of trivial fix -- set HELLO as constant
-WORLD = 'world'
+HELLO = 'Hola'  # part of trivial fix -- set HELLO as constant
+WORLD = 'mundo'
 
 
 @api.route('/hello')
