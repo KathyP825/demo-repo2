@@ -11,6 +11,7 @@ app = Flask(__name__)
 api = Api(app)
 
 HELLO = 'Hello'  # part of trivial fix -- set HELLO as constant
+WORLD = 'world'
 
 
 @api.route('/hello')
@@ -24,7 +25,7 @@ class HelloWorld(Resource):
         A trivial endpoint to see if the server is running.
         It just answers with "hello world."
         """
-        return {HELLO: 'world'}   # trivial fix -- make HELLO into constant
+        return {HELLO: WORLD}   # make world into constant
 
 
 @api.route('/endpoints')
