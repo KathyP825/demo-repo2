@@ -18,4 +18,7 @@ class EndpointTestCase(TestCase):
         hello = ep.HelloWorld(Resource)
         ret = hello.get()
         self.assertIsInstance(ret, dict)
+        
+        #self.assertIn('hello', ret) # bc 'h' is lowercase, cause test FAIL
+        self.assertIn(ep.HELLO, ret)    # uses new HELLO constant
 
