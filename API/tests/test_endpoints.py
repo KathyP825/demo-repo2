@@ -18,7 +18,13 @@ class EndpointTestCase(TestCase):
         hello = ep.HelloWorld(Resource)
         ret = hello.get()
         self.assertIsInstance(ret, dict)
-        
-        #self.assertIn('hello', ret) # bc 'h' is lowercase, cause test FAIL
         self.assertIn(ep.HELLO, ret)    # uses new HELLO constant
+    
+    def test_list_rooms1(self):
+        """
+        Invariant 1: return is a dictionary
+        """
+        lr = ep.ListRooms(Resource)
+        ret = lr.get()
+        self.assertIsInstance(ret, dict)
 
