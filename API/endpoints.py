@@ -6,6 +6,8 @@ The endpoint called `endpoints` will return all available endpoints.
 from http import HTTPStatus
 from flask import Flask
 from flask_restx import Resource, Api
+import werkzeug.exceptions as wz
+
 import db.db as db
 
 app = Flask(__name__)
@@ -45,6 +47,25 @@ class ListRooms(Resource):
             return rooms
 
 
+@api.route('/create_room/<roomname>')
+class CreateRoom(Resource):
+    """
+    This class supports adding a chat room.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, roomname):
+        """
+        This method adds a room to the room db.
+        """
+        ret = db.add_room(roomname)
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("Chat room db not found."))
+        elif ret == db.DUPLICATE:
+            raise (wz.NotAcceptable("Chat room name already exists."))
+
+
 @api.route('/endpoints')
 class Endpoints(Resource):
     """
@@ -65,8 +86,15 @@ class CreateUser(Resource):
     This class supports adding a user to the chat room.
     """
     @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
     def post(self, username):
         """
         This method adds a user to the chatroom.
         """
-        return username
+        ret = db.add_user(username)
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("User db not found."))
+        elif ret == db.DUPLICATE:
+            raise (wz.NotAcceptable("User name already exists."))
+        return f"{username} added."
