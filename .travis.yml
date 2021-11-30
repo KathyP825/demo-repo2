@@ -6,7 +6,7 @@ install:
     - pip install -r requirements-dev.txt
 
 env:
-    - PYTHONPATH=/home/travis/build/KathyP825/demo-repo2
+    - PYTHONPATH=/home/travis/build/KathyP825/demo-repo2/
 
 script:
     - make all_tests
@@ -15,7 +15,7 @@ script:
 deploy:
     - provider: heroku
       api_key: $HEROKU_API_KEY
-      app: swe-demo-repo2
+      app: swe-demo-repo-2
       on:
           branch: master
 
