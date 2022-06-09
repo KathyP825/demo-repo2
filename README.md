@@ -1,3 +1,11 @@
+# Demo-Repo2
+
+This is a repository where I was following along with class code before we were split into project groups.
+
+The project I worked on can be found at the [NYUHotspots Organization](https://github.com/NYUHotSpots).
+
+
+
 # Chatbot server
 
 ## Requirements
